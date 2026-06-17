@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Love Quiz Secret</title>
+
+  <style>
+    :root {
+      --pink: #ff2f7d;
+      --pink-2: #ff6fae;
+      --hot: #ff0f6b;
+      --white: #ffffff;
+      --glass: rgba(255, 255, 255, 0.18);
+      --glass-2: rgba(255, 255, 255, 0.28);
+      --dark: #372033;
+      --soft: #fff3f8;
+      --gold: #ffd166;
+      --purple: #b967ff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow: hidden;
+      color: #fff;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.35), transparent 20%),
+        linear-gradient(135deg, #ff6fae, #ff8fab, #ffd6a5, #cdb4db);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      filter: blur(15px);
+      opacity: 0.35;
+      z-index: 0;
+      animation: blobMove 12s ease-in-out infinite alternate;
+    }
+
+    body::before {
+      background: #ff2f7d;
+      top: -180px;
+      left: -160px;
+    }
+
+    body::after {
+      background: #8ec5ff;
+      right: -190px;
+      bottom: -190px;
+      animation-delay: 1.5s;
+    }
+
+    @keyframes blobMove {
+      from {
+        transform: translate(0, 0) scale(1);
+      }
+      to {
+        transform: translate(80px, 60px) scale(1.15);
+      }
+    }
+
+    canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      pointer-events: none;
+    }
+
+    .app {
+      width: 94%;
+      max-width: 580px;
+      max-height: 94vh;
+      overflow-y: auto;
+      position: relative;
+      z-index: 3;
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.42);
+      border-radius: 34px;
+      padding: 28px 24px;
+      text-align: center;
+      box-shadow:
+        0 28px 80px rgba(255, 15, 107, 0.35),
+        inset 0 0 30px rgba(255,255,255,0.08);
+      animation: appIn 0.8s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .app::-webkit-scrollbar {
+      width: 0;
+    }
+
+    @keyframes appIn {
+      from {
+        opacity: 0;
+        transform: translateY(35px) scale(0.92);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .screen {
+      display: none;
+      animation: fadeUp 0.45s ease;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .main-heart {
+      font-size: 68px;
+      margin-bottom: 8px;
+      filter: drop-shadow(0 12px 22px rgba(255, 47, 125, 0.45));
+      animation: heartbeat 1.15s infinite;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: scale(1);
+      }
+      20% {
+        transform: scale(1.16) rotate(-4deg);
+      }
+      40% {
+        transform: scale(0.96) rotate(3deg);
+      }
+      65% {
+        transform: scale(1.12);
+      }
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 15px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.28);
+      border: 1px solid rgba(255,255,255,0.35);
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: 31px;
+      line-height: 1.25;
+      margin-bottom: 12px;
+      text-shadow: 0 5px 18px rgba(0,0,0,0.18);
+    }
+
+    .desc {
+      font-size: 16px;
+      line-height: 1.65;
+      margin-bottom: 20px;
+      opacity: 0.98;
+    }
+
+    .btn {
+      border: none;
+      outline: none;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 14px 22px;
+      font-size: 16px;
+      font-weight: 900;
+      color: #fff;
+      background: linear-gradient(135deg, var(--pink), var(--hot));
+      box-shadow: 0 14px 30px rgba(255, 15, 107, 0.34);
+      transition: 0.22s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -80%;
+      width: 70%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent);
+      transform: skewX(-20deg);
+      transition: 0.4s;
+    }
+
+    .btn:hover::before {
+      left: 120%;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px) scale(1.035);
+    }
+
+    .btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-white {
+      background: #fff;
+      color: var(--pink);
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .mini-card {
+      background: rgba(255,255,255,0.22);
+      border: 1px solid rgba(255,255,255,0.28);
+      border-radius: 22px;
+      padding: 14px;
+      min-height: 92px;
+    }
+
+    .mini-card .icon {
+      font-size: 28px;
+      margin-bottom: 7px;
+    }
+
+    .mini-card p {
+      font-size: 14px;
+      line-height: 1.4;
+      font-weight: 700;
+    }
+
+    .progress-area {
+      margin: 18px 0 18px;
+    }
+
+    .progress-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .progress-wrap {
+      width: 100%;
+      height: 13px;
+      background: rgba(255,255,255,0.35);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress {
+      height: 100%;
+      width: 0%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #fff, #ffd166, #fff);
+      transition: 0.45s ease;
+    }
+
+    .question-box {
+      background: rgba(255,255,255,0.24);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 26px;
+      padding: 19px;
+      margin-bottom: 16px;
+      box-shadow: inset 0 0 18px rgba(255,255,255,0.08);
+    }
+
+    .question-icon {
+      font-size: 42px;
+      margin-bottom: 8px;
+      animation: wiggle 1.5s ease-in-out infinite;
+    }
+
+    @keyframes wiggle {
+      0%, 100% {
+        transform: rotate(0deg);
+      }
+      25% {
+        transform: rotate(-6deg);
+      }
+      75% {
+        transform: rotate(6deg);
+      }
+    }
+
+    .question-title {
+      font-size: 21px;
+      font-weight: 900;
+      line-height: 1.45;
+    }
+
+    input {
+      width: 100%;
+      border: none;
+      outline: none;
+      border-radius: 20px;
+      padding: 16px 18px;
+      font-size: 16px;
+      color: var(--pink);
+      background: rgba(255,255,255,0.95);
+      margin-bottom: 13px;
+      box-shadow:
+        inset 0 0 0 2px rgba(255,47,125,0.09),
+        0 10px 20px rgba(255, 47, 125, 0.12);
+    }
+
+    input::placeholder {
+      color: #ff92bd;
+    }
+
+    .analysis-panel {
+      display: none;
+      background: rgba(255,255,255,0.23);
+      border-radius: 20px;
+      padding: 14px;
+      margin-top: 13px;
+    }
+
+    .analysis-panel.active {
+      display: block;
+    }
+
+    .analysis-text {
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 9px;
+    }
+
+    .analysis-bar {
+      width: 100%;
+      height: 10px;
+      background: rgba(255,255,255,0.32);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .analysis-fill {
+      width: 0%;
+      height: 100%;
+      background: #fff;
+      border-radius: 999px;
+      transition: 0.25s;
+    }
+
+    .result-card {
+      display: none;
+      background: #fff;
+      color: #444;
+      border-radius: 22px;
+      padding: 15px;
+      margin-top: 14px;
+      text-align: left;
+      animation: pop 0.35s ease;
+    }
+
+    .result-card.active {
+      display: block;
+    }
+
+    @keyframes pop {
+      from {
+        transform: scale(0.88);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .result-card strong {
+      color: var(--pink);
+    }
+
+    .summary {
+      background: rgba(255,255,255,0.96);
+      color: #444;
+      border-radius: 24px;
+      padding: 16px;
+      margin: 18px 0;
+      text-align: left;
+      max-height: 285px;
+      overflow-y: auto;
+    }
+
+    .summary::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .summary::-webkit-scrollbar-thumb {
+      background: #ff9bc2;
+      border-radius: 99px;
+    }
+
+    .summary-item {
+      padding: 12px 0;
+      border-bottom: 1px dashed #ffabc9;
+    }
+
+    .summary-item:last-child {
+      border-bottom: none;
+    }
+
+    .summary-item b {
+      color: var(--pink);
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .love-score {
+      background: rgba(255,255,255,0.23);
+      border-radius: 24px;
+      padding: 16px;
+      margin: 16px 0;
+    }
+
+    .score-number {
+      font-size: 46px;
+      font-weight: 1000;
+      color: #fff;
+      text-shadow: 0 8px 20px rgba(255,15,107,0.35);
+    }
+
+    .letter {
+      white-space: pre-line;
+      background: #fff;
+      color: #463142;
+      border-radius: 25px;
+      padding: 20px;
+      line-height: 1.72;
+      text-align: left;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.16);
+      min-height: 210px;
+      margin-bottom: 16px;
+    }
+
+    .voucher-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .voucher {
+      background: linear-gradient(135deg, #fff, #fff3f8);
+      color: #4a3144;
+      border-radius: 22px;
+      padding: 15px;
+      text-align: left;
+      border: 2px dashed #ff7db0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .voucher::after {
+      content: "LOVE";
+      position: absolute;
+      right: -12px;
+      top: 12px;
+      font-size: 34px;
+      font-weight: 1000;
+      color: rgba(255,47,125,0.08);
+      transform: rotate(18deg);
+    }
+
+    .voucher b {
+      color: var(--pink);
+    }
+
+    .final-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      min-height: 60px;
+      margin-top: 12px;
+    }
+
+    #noBtnFinal {
+      position: relative;
+    }
+
+    .floating-heart,
+    .star {
+      position: fixed;
+      pointer-events: none;
+      z-index: 1;
+      user-select: none;
+    }
+
+    .floating-heart {
+      bottom: -45px;
+      animation: floatUp linear forwards;
+      opacity: 0.9;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+      15% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-118vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .star {
+      color: #fff;
+      animation: twinkle linear forwards;
+      opacity: 0;
+    }
+
+    @keyframes twinkle {
+      0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 0;
+      }
+      40% {
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1.4) rotate(180deg);
+        opacity: 0;
+      }
+    }
+
+    .shake {
+      animation: shake 0.35s ease;
+    }
+
+    @keyframes shake {
+      0%, 100% {
+        transform: translateX(0);
+      }
+      20% {
+        transform: translateX(-7px);
+      }
+      40% {
+        transform: translateX(7px);
+      }
+      60% {
+        transform: translateX(-5px);
+      }
+      80% {
+        transform: translateX(5px);
+      }
+    }
+
+    .small-note {
+      margin-top: 12px;
+      font-size: 13px;
+      opacity: 0.9;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 520px) {
+      .app {
+        padding: 23px 17px;
+        border-radius: 28px;
+      }
+
+      h1 {
+        font-size: 25px;
+      }
+
+      .question-title {
+        font-size: 19px;
+      }
+
+      .mini-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .final-buttons {
+        flex-direction: column;
+      }
+
+      .score-number {
+        font-size: 40px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="fxCanvas"></canvas>
+
+  <main class="app" id="app">
+    <!-- START -->
+    <section class="screen active" id="startScreen">
+      <div class="main-heart" id="secretHeart">💖</div>
+
+      <div class="badge">
+        🔐 Love Quiz Secret
+      </div>
+
+      <h1>Bài kiểm tra tình yêu dành riêng cho em</h1>
+
+      <p class="desc">
+        Đây là bài kiểm tra cực kỳ nghiêm túc.
+        Hệ thống sẽ phân tích trí nhớ, độ đáng yêu và mức độ yêu anh của em.
+      </p>
+
+      <div class="mini-grid">
+        <div class="mini-card">
+          <div class="icon">💌</div>
+          <p>Nhiều câu hỏi kỷ niệm siêu dễ thương</p>
+        </div>
+
+        <div class="mini-card">
+          <div class="icon">✨</div>
+          <p>Trả lời gì cũng được công nhận chính xác</p>
+        </div>
+
+        <div class="mini-card">
+          <div class="icon">🎁</div>
+          <p>Cuối cùng có quà bí mật</p>
+        </div>
+
+        <div class="mini-card">
+          <div class="icon">😝</div>
+          <p>Nút không yêu sẽ tự động chạy trốn</p>
+        </div>
+      </div>
+
+      <button class="btn" onclick="startQuiz()">
+        Bắt đầu kiểm tra 💘
+      </button>
+
+      <p class="small-note">
+        Gợi ý: trả lời bằng trái tim, không cần quá chính xác đâu.
+      </p>
+    </section>
+
+    <!-- QUIZ -->
+    <section class="screen" id="quizScreen">
+      <div class="main-heart">💕</div>
+
+      <div class="badge" id="modeBadge">
+        Đang kiểm tra ký ức
+      </div>
+
+      <h1 id="quizTitle">Câu hỏi tình yêu</h1>
+
+      <div class="progress-area">
+        <div class="progress-top">
+          <span id="progressText">Câu 1/18</span>
+          <span id="percentText">0%</span>
+        </div>
+
+        <div class="progress-wrap">
+          <div class="progress" id="progress"></div>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <div class="question-icon" id="questionIcon">💗</div>
+        <div class="question-title" id="questionTitle"></div>
+      </div>
+
+      <input
+        id="answerInput"
+        type="text"
+        autocomplete="off"
+        placeholder="Nhập câu trả lời của em..."
+      />
+
+      <button class="btn" id="answerBtn" onclick="submitAnswer()">
+        Xác nhận đáp án
+      </button>
+
+      <div class="analysis-panel" id="analysisPanel">
+        <div class="analysis-text" id="analysisText">
+          Đang phân tích độ đáng yêu...
+        </div>
+
+        <div class="analysis-bar">
+          <div class="analysis-fill" id="analysisFill"></div>
+        </div>
+      </div>
+
+      <div class="result-card" id="resultCard"></div>
+    </section>
+
+    <!-- END -->
+    <section class="screen" id="endScreen">
+      <div class="main-heart">💝</div>
+
+      <div class="badge">
+        🎉 Hoàn thành kiểm tra
+      </div>
+
+      <h1>Em đã vượt qua bài kiểm tra tình yêu</h1>
+
+      <p class="desc">
+        Kết quả đã được hệ thống trái tim xác nhận.
+        Không thể chối cãi nữa nha.
+      </p>
+
+      <div class="love-score">
+        <div>Điểm yêu anh của em là</div>
+        <div class="score-number" id="scoreNumber">0%</div>
+        <div>Vượt mức tối đa cho phép 💗</div>
+      </div>
+
+      <div class="summary" id="summary"></div>
+
+      <div class="letter" id="letter"></div>
+
+      <div class="voucher-grid">
+        <div class="voucher">
+          <b>🎟 Voucher 1:</b>
+          Được anh dỗ dành vô điều kiện khi em dỗi.
+        </div>
+
+        <div class="voucher">
+          <b>🎟 Voucher 2:</b>
+          Được chọn món ăn, địa điểm đi chơi và quyền làm công chúa.
+        </div>
+
+        <div class="voucher">
+          <b>🎟 Voucher 3:</b>
+          Được anh thương nhiều hơn mỗi ngày, không giới hạn thời gian.
+        </div>
+      </div>
+
+      <div class="final-buttons">
+        <button class="btn" onclick="finalLove()">
+          Em yêu anh nhiều lắm 💗
+        </button>
+
+        <button class="btn btn-white" id="noBtnFinal">
+          Không yêu nữa 😤
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    /*
+      =========================
+      SỬA TÊN Ở ĐÂY
+      =========================
+    */
+    const CONFIG = {
+      tenNguoiYeu: "em bé Thúy",
+      tenCuaBan: "anh Lực",
+      cachXungHo: "em"
+    };
+
+    /*
+      =========================
+      DANH SÁCH CÂU HỎI
+      Cô ấy nhập gì cũng đúng.
+      Muốn thêm câu hỏi thì thêm object mới vào mảng này.
+      =========================
+    */
+    const QUESTIONS = [
+      {
+        icon: "📅",
+        title: "Ngày mình chính thức yêu nhau là ngày nào?",
+        placeholder: "Ví dụ: 14/02/2024",
+        success: "Chính xác! Ngày đó hệ thống ghi nhận tim anh chính thức thuộc về em."
+      },
+      {
+        icon: "💬",
+        title: "Lần đầu mình nhắn tin với nhau, em ấn tượng gì nhất?",
+        placeholder: "Nhập điều em nhớ nhất...",
+        success: "Chuẩn luôn! Ngay từ đầu hệ thống đã thấy có mùi định mệnh."
+      },
+      {
+        icon: "☕",
+        title: "Lần đầu mình đi chơi riêng là ở đâu?",
+        placeholder: "Quán cafe, công viên, rạp phim...",
+        success: "Đúng rồi! Địa điểm đó đã được lưu vào bản đồ tình yêu."
+      },
+      {
+        icon: "🤝",
+        title: "Lần đầu mình nắm tay nhau là khi nào?",
+        placeholder: "Nhập theo trí nhớ đáng yêu của em...",
+        success: "Chính xác! Khoảnh khắc đó làm tim anh lag nhẹ."
+      },
+      {
+        icon: "😘",
+        title: "Lần đầu mình hôn nhau là khi nào?",
+        placeholder: "Em nhớ sao thì nhập vậy nha...",
+        success: "Hệ thống xác nhận đây là ký ức ngọt hơn trà sữa full topping."
+      },
+      {
+        icon: "😤",
+        title: "Lần đầu em dỗi anh là vì chuyện gì?",
+        placeholder: "Nhập lý do dỗi đáng yêu nhất...",
+        success: "Đáp án hợp lệ! Dỗi nhưng vẫn đáng yêu nên được cộng điểm."
+      },
+      {
+        icon: "🌙",
+        title: "Lần đầu mất ngủ vì nhớ nhau là hôm nào?",
+        placeholder: "Nhập đại cũng được, tim anh tự hiểu...",
+        success: "Đúng tuyệt đối! Nhớ nhau là triệu chứng yêu cấp độ cao."
+      },
+      {
+        icon: "🍜",
+        title: "Món ăn nào làm em nhớ đến anh nhất?",
+        placeholder: "Trà sữa, bún, lẩu, đồ nướng...",
+        success: "Chính xác! Hệ thống đề xuất lần sau anh phải mua món này."
+      },
+      {
+        icon: "🎵",
+        title: "Bài hát nào hợp với chuyện tình của mình?",
+        placeholder: "Nhập tên bài hát...",
+        success: "Hay quá! Bài này đã được thêm vào playlist yêu em."
+      },
+      {
+        icon: "📸",
+        title: "Kỷ niệm nào của hai đứa khiến em muốn lưu lại nhất?",
+        placeholder: "Nhập kỷ niệm em thích...",
+        success: "Ký ức này đẹp quá, hệ thống đã đóng khung trong tim."
+      },
+      {
+        icon: "😂",
+        title: "Khoảnh khắc nào của anh làm em buồn cười nhất?",
+        placeholder: "Kể xấu anh nhẹ nhẹ thôi nha...",
+        success: "Được rồi! Anh chấp nhận bị quê vì em cười là được."
+      },
+      {
+        icon: "🥺",
+        title: "Lúc em buồn, em muốn anh làm gì nhất?",
+        placeholder: "Ôm em, dỗ em, mua đồ ăn...",
+        success: "Đã ghi nhận! Từ giờ anh phải thực hiện đúng quy trình dỗ công chúa."
+      },
+      {
+        icon: "💎",
+        title: "Điều gì ở em làm anh mê nhất?",
+        placeholder: "Gợi ý: tất cả mọi thứ...",
+        success: "Chính xác! Thật ra đáp án đúng là tất cả những gì thuộc về em."
+      },
+      {
+        icon: "😎",
+        title: "Điều gì ở anh làm em thích nhất?",
+        placeholder: "Đẹp trai, chiều em, hài hước...",
+        success: "Quá chuẩn! Hệ thống công nhận anh cũng hơi đáng yêu thật."
+      },
+      {
+        icon: "🏖️",
+        title: "Nếu được đi du lịch cùng nhau, em muốn đi đâu?",
+        placeholder: "Đà Lạt, biển, Hàn Quốc, Nhật Bản...",
+        success: "Đã lưu điểm đến! Anh sẽ cố gắng biến nó thành lịch hẹn thật."
+      },
+      {
+        icon: "🏡",
+        title: "Sau này em muốn hai đứa có một căn nhà như thế nào?",
+        placeholder: "Nhỏ xinh, có mèo, có ban công...",
+        success: "Nghe ấm áp quá! Hệ thống vừa tưởng tượng xong đã thấy hạnh phúc."
+      },
+      {
+        icon: "🔒",
+        title: "Em hứa yêu anh đến bao giờ?",
+        placeholder: "Mãi mãi, hết đời, kiếp sau nữa...",
+        success: "Hợp đồng yêu thương đã được gia hạn vô thời hạn."
+      },
+      {
+        icon: "💌",
+        title: "Nhắn cho anh một câu thật lòng đi.",
+        placeholder: "Viết gì cũng được, miễn là từ trái tim...",
+        success: "Câu này hệ thống không chấm điểm nữa, vì anh đọc là đủ vui rồi."
+      }
+    ];
+
+    const $ = (id) => document.getElementById(id);
+
+    const app = $("app");
+    const startScreen = $("startScreen");
+    const quizScreen = $("quizScreen");
+    const endScreen = $("endScreen");
+
+    const progress = $("progress");
+    const progressText = $("progressText");
+    const percentText = $("percentText");
+
+    const questionIcon = $("questionIcon");
+    const questionTitle = $("questionTitle");
+    const answerInput = $("answerInput");
+    const answerBtn = $("answerBtn");
+
+    const analysisPanel = $("analysisPanel");
+    const analysisText = $("analysisText");
+    const analysisFill = $("analysisFill");
+    const resultCard = $("resultCard");
+
+    const summary = $("summary");
+    const letter = $("letter");
+    const scoreNumber = $("scoreNumber");
+    const noBtnFinal = $("noBtnFinal");
+    const secretHeart = $("secretHeart");
+
+    let currentIndex = 0;
+    let answers = [];
+    let isChecking = false;
+    let secretMode = false;
+
+    const analysisMessages = [
+      "Đang kiểm tra độ đáng yêu...",
+      "Đang đối chiếu ký ức tình yêu...",
+      "Đang đo nhịp tim của anh khi đọc đáp án...",
+      "Đang xác minh mức độ ngọt ngào...",
+      "Đang hỏi trái tim anh...",
+      "Đang cộng điểm vì em quá dễ thương..."
+    ];
+
+    function showScreen(screen) {
+      startScreen.classList.remove("active");
+      quizScreen.classList.remove("active");
+      endScreen.classList.remove("active");
+      screen.classList.add("active");
+    }
+
+    function startQuiz() {
+      showScreen(quizScreen);
+      currentIndex = 0;
+      answers = [];
+      renderQuestion();
+      burstAtCenter(["💖", "💕", "💗"], 22);
+    }
+
+    function renderQuestion() {
+      const q = QUESTIONS[currentIndex];
+      const percent = Math.round((currentIndex / QUESTIONS.length) * 100);
+
+      progress.style.width = percent + "%";
+      progressText.innerText = `Câu ${currentIndex + 1}/${QUESTIONS.length}`;
+      percentText.innerText = percent + "%";
+
+      questionIcon.innerText = q.icon;
+      questionTitle.innerText = q.title;
+
+      answerInput.value = "";
+      answerInput.placeholder = q.placeholder;
+
+      analysisPanel.classList.remove("active");
+      resultCard.classList.remove("active");
+      resultCard.innerHTML = "";
+
+      answerBtn.disabled = false;
+      answerBtn.innerText = "Xác nhận đáp án";
+
+      setTimeout(() => answerInput.focus(), 100);
+    }
+
+    function submitAnswer() {
+      if (isChecking) return;
+
+      const q = QUESTIONS[currentIndex];
+      let value = answerInput.value.trim();
+
+      if (!value) {
+        value = "Em ngại nên chưa nói, nhưng chắc chắn vẫn là đáp án đúng.";
+      }
+
+      isChecking = true;
+      answerBtn.disabled = true;
+      answerBtn.innerText = "Đang chấm điểm...";
+
+      analysisPanel.classList.add("active");
+      analysisFill.style.width = "0%";
+      resultCard.classList.remove("active");
+
+      let loadingPercent = 0;
+
+      const timer = setInterval(() => {
+        loadingPercent += Math.floor(Math.random() * 18) + 10;
+
+        if (loadingPercent > 100) {
+          loadingPercent = 100;
+        }
+
+        analysisFill.style.width = loadingPercent + "%";
+        analysisText.innerText = analysisMessages[Math.floor(Math.random() * analysisMessages.length)];
+
+        if (loadingPercent >= 100) {
+          clearInterval(timer);
+          showCorrectResult(q, value);
+        }
+      }, 260);
+    }
+
+    function showCorrectResult(q, value) {
+      const score = Math.floor(Math.random() * 4) + 97;
+
+      answers.push({
+        question: q.title,
+        answer: value,
+        icon: q.icon
+      });
+
+      resultCard.innerHTML = `
+        <strong>✅ Chính xác tuyệt đối!</strong><br>
+        ${q.success}<br><br>
+        Đáp án của em: <strong>${escapeHTML(value)}</strong><br>
+        Điểm hợp lệ: <strong>${score}%</strong>
+      `;
+
+      resultCard.classList.add("active");
+
+      burstFromElement(resultCard, ["💖", "✨", "💕", "🌸"], 20);
+      createFirework();
+
+      setTimeout(() => {
+        currentIndex++;
+
+        if (currentIndex >= QUESTIONS.length) {
+          finishQuiz();
+        } else {
+          isChecking = false;
+          renderQuestion();
+        }
+      }, 1500);
+    }
+
+    answerInput.addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        submitAnswer();
+      }
+    });
+
+    function finishQuiz() {
+      isChecking = false;
+      progress.style.width = "100%";
+      percentText.innerText = "100%";
+
+      showScreen(endScreen);
+      renderSummary();
+      animateScore();
+      typeLoveLetter();
+      startConfettiRain();
+      createFirework();
+      createFirework();
+    }
+
+    function renderSummary() {
+      let html = "";
+
+      answers.forEach((item, index) => {
+        html += `
+          <div class="summary-item">
+            <b>${item.icon} ${index + 1}. ${escapeHTML(item.question)}</b>
+            <span>${escapeHTML(item.answer)}</span>
+          </div>
+        `;
+      });
+
+      summary.innerHTML = html;
+    }
+
+    function animateScore() {
+      let n = 0;
+      const target = 999;
+
+      const timer = setInterval(() => {
+        n += 23;
+
+        if (n >= target) {
+          n = target;
+          clearInterval(timer);
+        }
+
+        scoreNumber.innerText = n + "%";
+      }, 22);
+    }
+
+    function typeLoveLetter() {
+      const text =
+`Gửi ${CONFIG.tenNguoiYeu},
+
+Sau khi phân tích toàn bộ câu trả lời, hệ thống tình yêu xin thông báo:
+
+${CONFIG.cachXungHo} đã chính thức vượt qua bài kiểm tra với số điểm cao bất thường. Mọi đáp án đều đúng, vì chỉ cần là ${CONFIG.cachXungHo} trả lời thì trái tim ${CONFIG.tenCuaBan} đã tự động công nhận rồi.
+
+Từ hôm nay, ${CONFIG.cachXungHo} bị phạt phải để ${CONFIG.tenCuaBan} thương nhiều hơn, dỗ dành nhiều hơn, quan tâm nhiều hơn và yêu ${CONFIG.cachXungHo} lâu thật lâu.
+
+Không được chối.
+Không được bỏ chạy.
+Không được hết yêu.
+
+Ký tên:
+Người đang yêu ${CONFIG.cachXungHo} rất nhiều 💗`;
+
+      letter.innerText = "";
+
+      let i = 0;
+      const timer = setInterval(() => {
+        letter.innerText += text.charAt(i);
+        i++;
+
+        if (i >= text.length) {
+          clearInterval(timer);
+        }
+      }, 22);
+    }
+
+    function finalLove() {
+      alert("Anh biết mà 😚 Yêu em nhất luôn!");
+      startConfettiRain();
+      createFirework();
+      createFirework();
+      burstAtCenter(["💖", "💕", "💗", "💘", "💝"], 50);
+    }
+
+    noBtnFinal.addEventListener("mouseover", moveNoButton);
+    noBtnFinal.addEventListener("click", moveNoButton);
+
+    function moveNoButton() {
+      const maxX = window.innerWidth - noBtnFinal.offsetWidth - 25;
+      const maxY = window.innerHeight - noBtnFinal.offsetHeight - 25;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      noBtnFinal.style.position = "fixed";
+      noBtnFinal.style.left = x + "px";
+      noBtnFinal.style.top = y + "px";
+      noBtnFinal.style.zIndex = "99";
+      noBtnFinal.innerText = "Không bấm được đâu 😝";
+
+      app.classList.add("shake");
+
+      setTimeout(() => {
+        app.classList.remove("shake");
+      }, 350);
+
+      burstFromElement(noBtnFinal, ["😝", "💘", "😂"], 12);
+    }
+
+    secretHeart.addEventListener("click", function() {
+      secretMode = !secretMode;
+
+      if (secretMode) {
+        alert("Đã bật chế độ mưa tim cực mạnh 💖");
+        for (let i = 0; i < 20; i++) {
+          setTimeout(createFloatingHeart, i * 80);
+        }
+      } else {
+        alert("Đã tắt chế độ bí mật 😚");
+      }
+    });
+
+    function escapeHTML(str) {
+      return String(str)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    /*
+      =========================
+      HIỆU ỨNG TIM BAY
+      =========================
+    */
+    function createFloatingHeart() {
+      const heart = document.createElement("div");
+      heart.className = "floating-heart";
+
+      const hearts = ["💖", "💕", "💗", "💘", "💝", "❤️", "🌸"];
+      heart.innerText = hearts[Math.floor(Math.random() * hearts.length)];
+
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 17 + "px";
+      heart.style.animationDuration = Math.random() * 3 + 4 + "s";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 7500);
+    }
+
+    setInterval(createFloatingHeart, 430);
+
+    /*
+      =========================
+      HIỆU ỨNG SAO LẤP LÁNH
+      =========================
+    */
+    function createStar() {
+      const star = document.createElement("div");
+      star.className = "star";
+      star.innerText = "✦";
+
+      star.style.left = Math.random() * 100 + "vw";
+      star.style.top = Math.random() * 100 + "vh";
+      star.style.fontSize = Math.random() * 16 + 10 + "px";
+      star.style.animationDuration = Math.random() * 2 + 1.4 + "s";
+
+      document.body.appendChild(star);
+
+      setTimeout(() => {
+        star.remove();
+      }, 3500);
+    }
+
+    setInterval(createStar, 260);
+
+    /*
+      =========================
+      BURST EMOJI
+      =========================
+    */
+    function burstAtCenter(emojis, count) {
+      for (let i = 0; i < count; i++) {
+        createEmojiParticle(
+          window.innerWidth / 2,
+          window.innerHeight / 2,
+          emojis[Math.floor(Math.random() * emojis.length)]
+        );
+      }
+    }
+
+    function burstFromElement(element, emojis, count) {
+      const rect = element.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
+
+      for (let i = 0; i < count; i++) {
+        createEmojiParticle(
+          x,
+          y,
+          emojis[Math.floor(Math.random() * emojis.length)]
+        );
+      }
+    }
+
+    function createEmojiParticle(x, y, emoji) {
+      const item = document.createElement("div");
+      item.innerText = emoji;
+      item.style.position = "fixed";
+      item.style.left = x + "px";
+      item.style.top = y + "px";
+      item.style.zIndex = "30";
+      item.style.pointerEvents = "none";
+      item.style.fontSize = Math.random() * 16 + 18 + "px";
+
+      const dx = (Math.random() - 0.5) * 240;
+      const dy = (Math.random() - 0.5) * 220;
+
+      item.animate(
+        [
+          {
+            transform: "translate(0, 0) scale(1)",
+            opacity: 1
+          },
+          {
+            transform: `translate(${dx}px, ${dy}px) scale(0.2) rotate(280deg)`,
+            opacity: 0
+          }
+        ],
+        {
+          duration: 900 + Math.random() * 500,
+          easing: "cubic-bezier(.2,.8,.2,1)"
+        }
+      );
+
+      document.body.appendChild(item);
+
+      setTimeout(() => {
+        item.remove();
+      }, 1500);
+    }
+
+    /*
+      =========================
+      CANVAS CONFETTI + FIREWORK
+      =========================
+    */
+    const canvas = $("fxCanvas");
+    const ctx = canvas.getContext("2d");
+
+    let particles = [];
+    let confettiRain = false;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    function randomColor() {
+      const colors = [
+        "#ffffff",
+        "#ff2f7d",
+        "#ffd166",
+        "#c77dff",
+        "#80ffdb",
+        "#ff9f1c",
+        "#a0c4ff"
+      ];
+
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    function addParticle(x, y, options = {}) {
+      particles.push({
+        x,
+        y,
+        vx: options.vx ?? (Math.random() - 0.5) * 8,
+        vy: options.vy ?? (Math.random() - 0.5) * 8,
+        size: options.size ?? Math.random() * 5 + 3,
+        color: options.color ?? randomColor(),
+        life: options.life ?? 80,
+        gravity: options.gravity ?? 0.08,
+        rotation: Math.random() * 360,
+        spin: Math.random() * 8 - 4,
+        type: options.type ?? "circle"
+      });
+    }
+
+    function createFirework() {
+      const x = Math.random() * canvas.width;
+      const y = Math.random() * canvas.height * 0.55 + 80;
+
+      for (let i = 0; i < 70; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = Math.random() * 5 + 2;
+
+        addParticle(x, y, {
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          size: Math.random() * 4 + 2,
+          life: Math.random() * 45 + 45,
+          gravity: 0.035,
+          type: Math.random() > 0.5 ? "rect" : "circle"
+        });
+      }
+    }
+
+    function startConfettiRain() {
+      confettiRain = true;
+
+      setTimeout(() => {
+        confettiRain = false;
+      }, 5200);
+    }
+
+    function animateCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      if (confettiRain) {
+        for (let i = 0; i < 5; i++) {
+          addParticle(Math.random() * canvas.width, -20, {
+            vx: (Math.random() - 0.5) * 2,
+            vy: Math.random() * 3 + 2,
+            size: Math.random() * 7 + 4,
+            life: 110,
+            gravity: 0.03,
+            type: "rect"
+          });
+        }
+      }
+
+      particles.forEach((p) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += p.gravity;
+        p.rotation += p.spin;
+        p.life--;
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate((p.rotation * Math.PI) / 180);
+        ctx.globalAlpha = Math.max(p.life / 90, 0);
+        ctx.fillStyle = p.color;
+
+        if (p.type === "rect") {
+          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+        } else {
+          ctx.beginPath();
+          ctx.arc(0, 0, p.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        ctx.restore();
+      });
+
+      particles = particles.filter((p) => p.life > 0);
+
+      requestAnimationFrame(animateCanvas);
+    }
+
+    animateCanvas();
+
+    setInterval(() => {
+      if (Math.random() > 0.55) {
+        createFirework();
+      }
+    }, 3600);
+  </script>
+</body>
+</html>
