@@ -4,20 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Love Quiz Secret</title>
+  <title>Love Quiz Anh Hiệp & Thanh Trúc</title>
 
   <style>
     :root {
       --pink: #ff2f7d;
-      --pink-2: #ff6fae;
+      --pink2: #ff77ad;
       --hot: #ff0f6b;
-      --white: #ffffff;
-      --glass: rgba(255, 255, 255, 0.18);
-      --glass-2: rgba(255, 255, 255, 0.28);
-      --dark: #372033;
-      --soft: #fff3f8;
+      --purple: #a855f7;
+      --blue: #60a5fa;
       --gold: #ffd166;
-      --purple: #b967ff;
+      --white: #ffffff;
+      --dark: #3a2134;
+      --soft: #fff4f8;
+      --glass: rgba(255, 255, 255, 0.18);
+      --glass2: rgba(255, 255, 255, 0.3);
     }
 
     * {
@@ -30,13 +31,14 @@
     body {
       min-height: 100vh;
       overflow: hidden;
-      color: #fff;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.35), transparent 20%),
-        linear-gradient(135deg, #ff6fae, #ff8fab, #ffd6a5, #cdb4db);
+      color: white;
       display: flex;
       align-items: center;
       justify-content: center;
+      background:
+        radial-gradient(circle at 15% 15%, rgba(255,255,255,0.45), transparent 18%),
+        radial-gradient(circle at 85% 20%, rgba(255,209,102,0.45), transparent 20%),
+        linear-gradient(135deg, #ff6fae, #ff8fab, #ffc8dd, #bde0fe);
     }
 
     body::before,
@@ -46,31 +48,31 @@
       width: 520px;
       height: 520px;
       border-radius: 50%;
-      filter: blur(15px);
+      filter: blur(18px);
       opacity: 0.35;
       z-index: 0;
-      animation: blobMove 12s ease-in-out infinite alternate;
+      animation: blob 12s ease-in-out infinite alternate;
     }
 
     body::before {
       background: #ff2f7d;
       top: -180px;
-      left: -160px;
+      left: -180px;
     }
 
     body::after {
-      background: #8ec5ff;
-      right: -190px;
-      bottom: -190px;
-      animation-delay: 1.5s;
+      background: #7dd3fc;
+      right: -180px;
+      bottom: -180px;
+      animation-delay: 2s;
     }
 
-    @keyframes blobMove {
+    @keyframes blob {
       from {
         transform: translate(0, 0) scale(1);
       }
       to {
-        transform: translate(80px, 60px) scale(1.15);
+        transform: translate(70px, 50px) scale(1.15);
       }
     }
 
@@ -82,22 +84,22 @@
     }
 
     .app {
-      width: 94%;
-      max-width: 580px;
-      max-height: 94vh;
-      overflow-y: auto;
       position: relative;
       z-index: 3;
-      background: var(--glass);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.42);
-      border-radius: 34px;
+      width: 94%;
+      max-width: 620px;
+      max-height: 94vh;
+      overflow-y: auto;
       padding: 28px 24px;
       text-align: center;
+      background: var(--glass);
+      backdrop-filter: blur(22px);
+      border: 1px solid rgba(255,255,255,0.45);
+      border-radius: 36px;
       box-shadow:
-        0 28px 80px rgba(255, 15, 107, 0.35),
-        inset 0 0 30px rgba(255,255,255,0.08);
-      animation: appIn 0.8s cubic-bezier(.2,.8,.2,1);
+        0 30px 90px rgba(255, 15, 107, 0.36),
+        inset 0 0 36px rgba(255,255,255,0.12);
+      animation: appIn 0.7s cubic-bezier(.2,.8,.2,1);
     }
 
     .app::-webkit-scrollbar {
@@ -135,26 +137,26 @@
       }
     }
 
-    .main-heart {
-      font-size: 68px;
+    .heart-main {
+      font-size: 72px;
       margin-bottom: 8px;
-      filter: drop-shadow(0 12px 22px rgba(255, 47, 125, 0.45));
-      animation: heartbeat 1.15s infinite;
       cursor: pointer;
       user-select: none;
+      filter: drop-shadow(0 12px 22px rgba(255,47,125,0.45));
+      animation: heartBeat 1.12s infinite;
     }
 
-    @keyframes heartbeat {
+    @keyframes heartBeat {
       0%, 100% {
         transform: scale(1);
       }
-      20% {
-        transform: scale(1.16) rotate(-4deg);
+      22% {
+        transform: scale(1.18) rotate(-4deg);
       }
-      40% {
-        transform: scale(0.96) rotate(3deg);
+      45% {
+        transform: scale(0.95) rotate(3deg);
       }
-      65% {
+      70% {
         transform: scale(1.12);
       }
     }
@@ -162,60 +164,112 @@
     .badge {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
       padding: 9px 15px;
-      border-radius: 999px;
+      margin-bottom: 13px;
       background: rgba(255,255,255,0.28);
-      border: 1px solid rgba(255,255,255,0.35);
+      border: 1px solid rgba(255,255,255,0.38);
+      border-radius: 999px;
       font-size: 14px;
-      font-weight: 800;
-      margin-bottom: 14px;
+      font-weight: 900;
     }
 
     h1 {
       font-size: 31px;
       line-height: 1.25;
       margin-bottom: 12px;
-      text-shadow: 0 5px 18px rgba(0,0,0,0.18);
+      text-shadow: 0 6px 20px rgba(0,0,0,0.16);
     }
 
     .desc {
       font-size: 16px;
-      line-height: 1.65;
-      margin-bottom: 20px;
+      line-height: 1.7;
       opacity: 0.98;
+      margin-bottom: 20px;
+    }
+
+    .couple-card {
+      background: rgba(255,255,255,0.24);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 26px;
+      padding: 16px;
+      margin: 16px 0 20px;
+      box-shadow: inset 0 0 18px rgba(255,255,255,0.08);
+    }
+
+    .couple-names {
+      font-size: 25px;
+      font-weight: 1000;
+      line-height: 1.45;
+    }
+
+    .date-love {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.28);
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .feature {
+      background: rgba(255,255,255,0.22);
+      border: 1px solid rgba(255,255,255,0.28);
+      border-radius: 22px;
+      padding: 14px;
+      min-height: 96px;
+    }
+
+    .feature .icon {
+      font-size: 30px;
+      margin-bottom: 7px;
+    }
+
+    .feature p {
+      font-size: 14px;
+      line-height: 1.45;
+      font-weight: 800;
     }
 
     .btn {
       border: none;
       outline: none;
       cursor: pointer;
+      position: relative;
+      overflow: hidden;
       border-radius: 999px;
       padding: 14px 22px;
       font-size: 16px;
-      font-weight: 900;
-      color: #fff;
+      font-weight: 1000;
+      color: white;
       background: linear-gradient(135deg, var(--pink), var(--hot));
-      box-shadow: 0 14px 30px rgba(255, 15, 107, 0.34);
+      box-shadow: 0 15px 32px rgba(255,15,107,0.34);
       transition: 0.22s;
-      position: relative;
-      overflow: hidden;
     }
 
     .btn::before {
       content: "";
       position: absolute;
       top: 0;
-      left: -80%;
+      left: -90%;
       width: 70%;
       height: 100%;
       background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent);
-      transform: skewX(-20deg);
-      transition: 0.4s;
+      transform: skewX(-18deg);
+      transition: 0.45s;
     }
 
     .btn:hover::before {
-      left: 120%;
+      left: 125%;
     }
 
     .btn:hover {
@@ -223,58 +277,32 @@
     }
 
     .btn:disabled {
-      opacity: 0.7;
+      opacity: 0.72;
       cursor: not-allowed;
       transform: none;
     }
 
     .btn-white {
-      background: #fff;
+      background: white;
       color: var(--pink);
     }
 
-    .mini-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin: 20px 0;
-    }
-
-    .mini-card {
-      background: rgba(255,255,255,0.22);
-      border: 1px solid rgba(255,255,255,0.28);
-      border-radius: 22px;
-      padding: 14px;
-      min-height: 92px;
-    }
-
-    .mini-card .icon {
-      font-size: 28px;
-      margin-bottom: 7px;
-    }
-
-    .mini-card p {
-      font-size: 14px;
-      line-height: 1.4;
-      font-weight: 700;
-    }
-
     .progress-area {
-      margin: 18px 0 18px;
+      margin: 17px 0 18px;
     }
 
     .progress-top {
       display: flex;
       justify-content: space-between;
       font-size: 14px;
-      font-weight: 800;
+      font-weight: 900;
       margin-bottom: 8px;
     }
 
     .progress-wrap {
       width: 100%;
       height: 13px;
-      background: rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.36);
       border-radius: 999px;
       overflow: hidden;
     }
@@ -288,16 +316,16 @@
     }
 
     .question-box {
-      background: rgba(255,255,255,0.24);
-      border: 1px solid rgba(255,255,255,0.35);
-      border-radius: 26px;
-      padding: 19px;
-      margin-bottom: 16px;
+      background: rgba(255,255,255,0.25);
+      border: 1px solid rgba(255,255,255,0.38);
+      border-radius: 28px;
+      padding: 20px;
+      margin-bottom: 15px;
       box-shadow: inset 0 0 18px rgba(255,255,255,0.08);
     }
 
     .question-icon {
-      font-size: 42px;
+      font-size: 46px;
       margin-bottom: 8px;
       animation: wiggle 1.5s ease-in-out infinite;
     }
@@ -316,7 +344,7 @@
 
     .question-title {
       font-size: 21px;
-      font-weight: 900;
+      font-weight: 1000;
       line-height: 1.45;
     }
 
@@ -324,27 +352,27 @@
       width: 100%;
       border: none;
       outline: none;
-      border-radius: 20px;
+      border-radius: 21px;
       padding: 16px 18px;
       font-size: 16px;
       color: var(--pink);
-      background: rgba(255,255,255,0.95);
+      background: rgba(255,255,255,0.96);
       margin-bottom: 13px;
       box-shadow:
-        inset 0 0 0 2px rgba(255,47,125,0.09),
-        0 10px 20px rgba(255, 47, 125, 0.12);
+        inset 0 0 0 2px rgba(255,47,125,0.08),
+        0 10px 22px rgba(255,47,125,0.12);
     }
 
     input::placeholder {
-      color: #ff92bd;
+      color: #ff91bc;
     }
 
     .analysis-panel {
       display: none;
-      background: rgba(255,255,255,0.23);
-      border-radius: 20px;
-      padding: 14px;
       margin-top: 13px;
+      padding: 14px;
+      background: rgba(255,255,255,0.24);
+      border-radius: 22px;
     }
 
     .analysis-panel.active {
@@ -353,14 +381,14 @@
 
     .analysis-text {
       font-size: 14px;
-      font-weight: 800;
+      font-weight: 900;
       margin-bottom: 9px;
     }
 
     .analysis-bar {
       width: 100%;
       height: 10px;
-      background: rgba(255,255,255,0.32);
+      background: rgba(255,255,255,0.34);
       border-radius: 999px;
       overflow: hidden;
     }
@@ -368,19 +396,20 @@
     .analysis-fill {
       width: 0%;
       height: 100%;
-      background: #fff;
+      background: white;
       border-radius: 999px;
-      transition: 0.25s;
+      transition: 0.22s;
     }
 
     .result-card {
       display: none;
-      background: #fff;
-      color: #444;
-      border-radius: 22px;
-      padding: 15px;
       margin-top: 14px;
+      padding: 16px;
       text-align: left;
+      background: white;
+      color: #43313f;
+      border-radius: 24px;
+      line-height: 1.58;
       animation: pop 0.35s ease;
     }
 
@@ -388,30 +417,45 @@
       display: block;
     }
 
-    @keyframes pop {
-      from {
-        transform: scale(0.88);
-        opacity: 0;
-      }
-      to {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
-
+    .result-card b,
     .result-card strong {
       color: var(--pink);
     }
 
+    @keyframes pop {
+      from {
+        opacity: 0;
+        transform: scale(0.88);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .love-score {
+      margin: 16px 0;
+      padding: 17px;
+      border-radius: 26px;
+      background: rgba(255,255,255,0.24);
+      border: 1px solid rgba(255,255,255,0.35);
+    }
+
+    .score-number {
+      font-size: 48px;
+      font-weight: 1000;
+      text-shadow: 0 8px 20px rgba(255,15,107,0.36);
+    }
+
     .summary {
-      background: rgba(255,255,255,0.96);
-      color: #444;
-      border-radius: 24px;
-      padding: 16px;
-      margin: 18px 0;
-      text-align: left;
-      max-height: 285px;
+      max-height: 300px;
       overflow-y: auto;
+      margin: 17px 0;
+      padding: 16px;
+      background: rgba(255,255,255,0.96);
+      color: #43313f;
+      border-radius: 25px;
+      text-align: left;
     }
 
     .summary::-webkit-scrollbar {
@@ -420,12 +464,13 @@
 
     .summary::-webkit-scrollbar-thumb {
       background: #ff9bc2;
-      border-radius: 99px;
+      border-radius: 999px;
     }
 
     .summary-item {
       padding: 12px 0;
       border-bottom: 1px dashed #ffabc9;
+      line-height: 1.55;
     }
 
     .summary-item:last-child {
@@ -433,36 +478,29 @@
     }
 
     .summary-item b {
-      color: var(--pink);
       display: block;
-      margin-bottom: 5px;
+      color: var(--pink);
+      margin-bottom: 4px;
     }
 
-    .love-score {
-      background: rgba(255,255,255,0.23);
-      border-radius: 24px;
-      padding: 16px;
-      margin: 16px 0;
-    }
-
-    .score-number {
-      font-size: 46px;
-      font-weight: 1000;
-      color: #fff;
-      text-shadow: 0 8px 20px rgba(255,15,107,0.35);
+    .summary-item .system-answer {
+      display: block;
+      margin-top: 5px;
+      color: #7c3aed;
+      font-weight: 800;
     }
 
     .letter {
-      white-space: pre-line;
-      background: #fff;
-      color: #463142;
-      border-radius: 25px;
-      padding: 20px;
-      line-height: 1.72;
-      text-align: left;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.16);
       min-height: 210px;
       margin-bottom: 16px;
+      padding: 20px;
+      text-align: left;
+      white-space: pre-line;
+      line-height: 1.75;
+      color: #43313f;
+      background: white;
+      border-radius: 26px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.16);
     }
 
     .voucher-grid {
@@ -473,22 +511,23 @@
     }
 
     .voucher {
-      background: linear-gradient(135deg, #fff, #fff3f8);
-      color: #4a3144;
-      border-radius: 22px;
-      padding: 15px;
-      text-align: left;
-      border: 2px dashed #ff7db0;
       position: relative;
       overflow: hidden;
+      padding: 15px;
+      text-align: left;
+      color: #43313f;
+      background: linear-gradient(135deg, #fff, #fff3f8);
+      border: 2px dashed #ff7db0;
+      border-radius: 23px;
+      line-height: 1.55;
     }
 
     .voucher::after {
       content: "LOVE";
       position: absolute;
-      right: -12px;
+      right: -13px;
       top: 12px;
-      font-size: 34px;
+      font-size: 35px;
       font-weight: 1000;
       color: rgba(255,47,125,0.08);
       transform: rotate(18deg);
@@ -514,8 +553,8 @@
     .star {
       position: fixed;
       pointer-events: none;
-      z-index: 1;
       user-select: none;
+      z-index: 1;
     }
 
     .floating-heart {
@@ -526,35 +565,35 @@
 
     @keyframes floatUp {
       0% {
-        transform: translateY(0) rotate(0deg);
         opacity: 0;
+        transform: translateY(0) rotate(0deg);
       }
       15% {
         opacity: 1;
       }
       100% {
-        transform: translateY(-118vh) rotate(360deg);
         opacity: 0;
+        transform: translateY(-118vh) rotate(360deg);
       }
     }
 
     .star {
-      color: #fff;
-      animation: twinkle linear forwards;
+      color: white;
       opacity: 0;
+      animation: twinkle linear forwards;
     }
 
     @keyframes twinkle {
       0% {
-        transform: scale(0) rotate(0deg);
         opacity: 0;
+        transform: scale(0) rotate(0deg);
       }
       40% {
         opacity: 1;
       }
       100% {
-        transform: scale(1.4) rotate(180deg);
         opacity: 0;
+        transform: scale(1.45) rotate(180deg);
       }
     }
 
@@ -583,14 +622,14 @@
     .small-note {
       margin-top: 12px;
       font-size: 13px;
-      opacity: 0.9;
+      opacity: 0.92;
       line-height: 1.5;
     }
 
     @media (max-width: 520px) {
       .app {
         padding: 23px 17px;
-        border-radius: 28px;
+        border-radius: 29px;
       }
 
       h1 {
@@ -601,7 +640,7 @@
         font-size: 19px;
       }
 
-      .mini-grid {
+      .feature-grid {
         grid-template-columns: 1fr;
       }
 
@@ -610,7 +649,7 @@
       }
 
       .score-number {
-        font-size: 40px;
+        font-size: 41px;
       }
     }
   </style>
@@ -620,65 +659,75 @@
   <canvas id="fxCanvas"></canvas>
 
   <main class="app" id="app">
-    <!-- START -->
+    <!-- START SCREEN -->
     <section class="screen active" id="startScreen">
-      <div class="main-heart" id="secretHeart">💖</div>
+      <div class="heart-main" id="secretHeart">💖</div>
 
       <div class="badge">
         🔐 Love Quiz Secret
       </div>
 
-      <h1>Bài kiểm tra tình yêu dành riêng cho em</h1>
+      <h1>Bài kiểm tra tình yêu dành riêng cho Thanh Trúc</h1>
 
       <p class="desc">
-        Đây là bài kiểm tra cực kỳ nghiêm túc.
-        Hệ thống sẽ phân tích trí nhớ, độ đáng yêu và mức độ yêu anh của em.
+        Đây là bài kiểm tra siêu nghiêm túc của Anh Hiệp.
+        Thanh Trúc chỉ cần trả lời bằng trái tim, còn hệ thống sẽ tự động công nhận là đúng.
       </p>
 
-      <div class="mini-grid">
-        <div class="mini-card">
+      <div class="couple-card">
+        <div class="couple-names">
+          Anh Hiệp 💘 Thanh Trúc
+        </div>
+
+        <div class="date-love">
+          Ngày yêu nhau: 31/10/2025
+        </div>
+      </div>
+
+      <div class="feature-grid">
+        <div class="feature">
           <div class="icon">💌</div>
-          <p>Nhiều câu hỏi kỷ niệm siêu dễ thương</p>
+          <p>Nhiều câu hỏi kỷ niệm riêng của hai đứa</p>
         </div>
 
-        <div class="mini-card">
+        <div class="feature">
           <div class="icon">✨</div>
-          <p>Trả lời gì cũng được công nhận chính xác</p>
+          <p>Nhập gì cũng được hệ thống công nhận chính xác</p>
         </div>
 
-        <div class="mini-card">
-          <div class="icon">🎁</div>
-          <p>Cuối cùng có quà bí mật</p>
+        <div class="feature">
+          <div class="icon">🎆</div>
+          <p>Tim bay, sao lấp lánh, pháo hoa, confetti</p>
         </div>
 
-        <div class="mini-card">
+        <div class="feature">
           <div class="icon">😝</div>
-          <p>Nút không yêu sẽ tự động chạy trốn</p>
+          <p>Nút “không yêu” sẽ chạy trốn cực mạnh</p>
         </div>
       </div>
 
       <button class="btn" onclick="startQuiz()">
-        Bắt đầu kiểm tra 💘
+        Bắt đầu kiểm tra tình yêu 💘
       </button>
 
       <p class="small-note">
-        Gợi ý: trả lời bằng trái tim, không cần quá chính xác đâu.
+        Bấm vào trái tim phía trên để bật chế độ mưa tim bí mật.
       </p>
     </section>
 
-    <!-- QUIZ -->
+    <!-- QUIZ SCREEN -->
     <section class="screen" id="quizScreen">
-      <div class="main-heart">💕</div>
+      <div class="heart-main">💕</div>
 
       <div class="badge" id="modeBadge">
-        Đang kiểm tra ký ức
+        Đang kiểm tra ký ức yêu thương
       </div>
 
-      <h1 id="quizTitle">Câu hỏi tình yêu</h1>
+      <h1>Câu hỏi tình yêu</h1>
 
       <div class="progress-area">
         <div class="progress-top">
-          <span id="progressText">Câu 1/18</span>
+          <span id="progressText">Câu 1/30</span>
           <span id="percentText">0%</span>
         </div>
 
@@ -696,7 +745,7 @@
         id="answerInput"
         type="text"
         autocomplete="off"
-        placeholder="Nhập câu trả lời của em..."
+        placeholder="Thanh Trúc nhập câu trả lời ở đây..."
       />
 
       <button class="btn" id="answerBtn" onclick="submitAnswer()">
@@ -716,25 +765,25 @@
       <div class="result-card" id="resultCard"></div>
     </section>
 
-    <!-- END -->
+    <!-- END SCREEN -->
     <section class="screen" id="endScreen">
-      <div class="main-heart">💝</div>
+      <div class="heart-main">💝</div>
 
       <div class="badge">
-        🎉 Hoàn thành kiểm tra
+        🎉 Hoàn thành bài kiểm tra
       </div>
 
-      <h1>Em đã vượt qua bài kiểm tra tình yêu</h1>
+      <h1>Thanh Trúc đã vượt qua bài kiểm tra tình yêu</h1>
 
       <p class="desc">
-        Kết quả đã được hệ thống trái tim xác nhận.
+        Kết quả được xác nhận bởi hệ thống trái tim của Anh Hiệp.
         Không thể chối cãi nữa nha.
       </p>
 
       <div class="love-score">
-        <div>Điểm yêu anh của em là</div>
+        <div>Điểm yêu Anh Hiệp của Thanh Trúc là</div>
         <div class="score-number" id="scoreNumber">0%</div>
-        <div>Vượt mức tối đa cho phép 💗</div>
+        <div>Vượt xa mức tối đa cho phép 💗</div>
       </div>
 
       <div class="summary" id="summary"></div>
@@ -744,23 +793,28 @@
       <div class="voucher-grid">
         <div class="voucher">
           <b>🎟 Voucher 1:</b>
-          Được anh dỗ dành vô điều kiện khi em dỗi.
+          Thanh Trúc được Anh Hiệp dỗ dành vô điều kiện mỗi khi buồn.
         </div>
 
         <div class="voucher">
           <b>🎟 Voucher 2:</b>
-          Được chọn món ăn, địa điểm đi chơi và quyền làm công chúa.
+          Thanh Trúc được quyền chọn món ăn, địa điểm đi chơi và quyền làm công chúa.
         </div>
 
         <div class="voucher">
           <b>🎟 Voucher 3:</b>
-          Được anh thương nhiều hơn mỗi ngày, không giới hạn thời gian.
+          Anh Hiệp phải thương Thanh Trúc nhiều hơn mỗi ngày, không giới hạn thời gian.
+        </div>
+
+        <div class="voucher">
+          <b>🎟 Voucher 4:</b>
+          Khi Thanh Trúc nhớ Anh Hiệp, Anh Hiệp phải xuất hiện hoặc nhắn tin ngay khi có thể.
         </div>
       </div>
 
       <div class="final-buttons">
         <button class="btn" onclick="finalLove()">
-          Em yêu anh nhiều lắm 💗
+          Em yêu Anh Hiệp nhiều lắm 💗
         </button>
 
         <button class="btn btn-white" id="noBtnFinal">
@@ -773,130 +827,235 @@
   <script>
     /*
       =========================
-      SỬA TÊN Ở ĐÂY
+      THÔNG TIN CỦA HAI BẠN
       =========================
     */
     const CONFIG = {
-      tenNguoiYeu: "em bé Thúy",
-      tenCuaBan: "anh Lực",
-      cachXungHo: "em"
+      tenNguoiYeu: "Thanh Trúc",
+      tenCuaBan: "Anh Hiệp",
+      cachXungHo: "em",
+      ngayYeu: "31/10/2025"
     };
+const THOI_GIAN_PHAN_TICH = 350;
+const THOI_GIAN_HIEN_KET_QUA = 5500;
 
     /*
       =========================
       DANH SÁCH CÂU HỎI
-      Cô ấy nhập gì cũng đúng.
-      Muốn thêm câu hỏi thì thêm object mới vào mảng này.
+      - Thanh Trúc nhập gì cũng đúng.
+      - dapAnHeThong là đáp án riêng của hai bạn.
       =========================
     */
     const QUESTIONS = [
       {
         icon: "📅",
         title: "Ngày mình chính thức yêu nhau là ngày nào?",
-        placeholder: "Ví dụ: 14/02/2024",
-        success: "Chính xác! Ngày đó hệ thống ghi nhận tim anh chính thức thuộc về em."
+        placeholder: "Ví dụ: 31/10/2025",
+        dapAnHeThong: "31/10/2025",
+        success: "Chính xác! Ngày này hệ thống ghi nhận tim Anh Hiệp thuộc về Thanh Trúc."
+      },
+      {
+        icon: "🍓",
+        title: "Món Anh Hiệp thích nhất là gì?",
+        placeholder: "Gợi ý: liên quan đến Thanh Trúc...",
+        dapAnHeThong: "Anh Hiệp thích Thanh Trúc nhất",
+        success: "Chuẩn luôn! Với Anh Hiệp, Thanh Trúc là điều ngọt ngào nhất."
       },
       {
         icon: "💬",
         title: "Lần đầu mình nhắn tin với nhau, em ấn tượng gì nhất?",
-        placeholder: "Nhập điều em nhớ nhất...",
-        success: "Chuẩn luôn! Ngay từ đầu hệ thống đã thấy có mùi định mệnh."
+        placeholder: "Thanh Trúc nhập điều nhớ nhất...",
+        dapAnHeThong: "Thanh Trúc dễ thương nên Anh Hiệp nhớ mãi",
+        success: "Đúng rồi! Ngay từ lúc nhắn tin đã có mùi định mệnh."
       },
       {
-        icon: "☕",
+        icon: "🌲",
         title: "Lần đầu mình đi chơi riêng là ở đâu?",
-        placeholder: "Quán cafe, công viên, rạp phim...",
-        success: "Đúng rồi! Địa điểm đó đã được lưu vào bản đồ tình yêu."
+        placeholder: "Nhập địa điểm lần đầu đi chơi...",
+        dapAnHeThong: "Rừng Quốc Phương",
+        success: "Chính xác! Địa điểm này đã được lưu vào bản đồ tình yêu."
       },
       {
         icon: "🤝",
         title: "Lần đầu mình nắm tay nhau là khi nào?",
-        placeholder: "Nhập theo trí nhớ đáng yêu của em...",
-        success: "Chính xác! Khoảnh khắc đó làm tim anh lag nhẹ."
+        placeholder: "Ví dụ: 02/11/2025",
+        dapAnHeThong: "02/11/2025",
+        success: "Đúng tuyệt đối! Khoảnh khắc đó làm tim Anh Hiệp lag nhẹ."
       },
       {
         icon: "😘",
         title: "Lần đầu mình hôn nhau là khi nào?",
-        placeholder: "Em nhớ sao thì nhập vậy nha...",
-        success: "Hệ thống xác nhận đây là ký ức ngọt hơn trà sữa full topping."
+        placeholder: "Nhập ngày kỷ niệm ngọt nhất...",
+        dapAnHeThong: "02/11/2025",
+        success: "Chuẩn luôn! Đây là ký ức ngọt hơn trà sữa full topping."
       },
       {
         icon: "😤",
-        title: "Lần đầu em dỗi anh là vì chuyện gì?",
-        placeholder: "Nhập lý do dỗi đáng yêu nhất...",
-        success: "Đáp án hợp lệ! Dỗi nhưng vẫn đáng yêu nên được cộng điểm."
+        title: "Lần đầu em dỗi Anh Hiệp là vì chuyện gì?",
+        placeholder: "Nhập lý do dỗi nếu có...",
+        dapAnHeThong: "Không dỗi",
+        success: "Quá ngoan! Hệ thống xác nhận Thanh Trúc là công chúa ít dỗi."
       },
       {
-        icon: "🌙",
-        title: "Lần đầu mất ngủ vì nhớ nhau là hôm nào?",
-        placeholder: "Nhập đại cũng được, tim anh tự hiểu...",
-        success: "Đúng tuyệt đối! Nhớ nhau là triệu chứng yêu cấp độ cao."
-      },
-      {
-        icon: "🍜",
-        title: "Món ăn nào làm em nhớ đến anh nhất?",
-        placeholder: "Trà sữa, bún, lẩu, đồ nướng...",
-        success: "Chính xác! Hệ thống đề xuất lần sau anh phải mua món này."
+        icon: "🍖",
+        title: "Món ăn nào làm em nhớ đến Anh Hiệp nhất?",
+        placeholder: "Nhập món ăn đặc biệt...",
+        dapAnHeThong: "Thịt chó",
+        success: "Đã lưu món ăn kỷ niệm. Lần sau Anh Hiệp phải nhớ nha."
       },
       {
         icon: "🎵",
         title: "Bài hát nào hợp với chuyện tình của mình?",
         placeholder: "Nhập tên bài hát...",
-        success: "Hay quá! Bài này đã được thêm vào playlist yêu em."
-      },
-      {
-        icon: "📸",
-        title: "Kỷ niệm nào của hai đứa khiến em muốn lưu lại nhất?",
-        placeholder: "Nhập kỷ niệm em thích...",
-        success: "Ký ức này đẹp quá, hệ thống đã đóng khung trong tim."
+        dapAnHeThong: "Kiếp người",
+        success: "Đúng rồi! Bài hát này đã được thêm vào playlist tình yêu."
       },
       {
         icon: "😂",
-        title: "Khoảnh khắc nào của anh làm em buồn cười nhất?",
-        placeholder: "Kể xấu anh nhẹ nhẹ thôi nha...",
-        success: "Được rồi! Anh chấp nhận bị quê vì em cười là được."
+        title: "Kỷ niệm nào của hai đứa khiến em muốn lưu lại nhất?",
+        placeholder: "Nhập kỷ niệm vui nhất...",
+        dapAnHeThong: "Anh Hiệp sặc thuốc lào",
+        success: "Kỷ niệm này hài quá! Hệ thống vừa lưu vừa cười."
       },
       {
-        icon: "🥺",
-        title: "Lúc em buồn, em muốn anh làm gì nhất?",
-        placeholder: "Ôm em, dỗ em, mua đồ ăn...",
-        success: "Đã ghi nhận! Từ giờ anh phải thực hiện đúng quy trình dỗ công chúa."
+        icon: "👀",
+        title: "Lần đầu nhìn thấy Thanh Trúc, Anh Hiệp nghĩ gì?",
+        placeholder: "Thanh Trúc thử đoán xem...",
+        dapAnHeThong: "Sao lại có người dễ thương thế này",
+        success: "Chính xác! Anh Hiệp đã bị Thanh Trúc gây thương nhớ từ đó."
       },
       {
-        icon: "💎",
-        title: "Điều gì ở em làm anh mê nhất?",
-        placeholder: "Gợi ý: tất cả mọi thứ...",
-        success: "Chính xác! Thật ra đáp án đúng là tất cả những gì thuộc về em."
+        icon: "🥰",
+        title: "Thanh Trúc nghĩ điểm đáng yêu nhất của mình là gì?",
+        placeholder: "Mắt, nụ cười, tính cách...",
+        dapAnHeThong: "Tất cả mọi thứ ở Thanh Trúc đều đáng yêu",
+        success: "Hệ thống đồng ý. Không có điểm nào là không đáng yêu."
       },
       {
         icon: "😎",
-        title: "Điều gì ở anh làm em thích nhất?",
+        title: "Điểm nào ở Anh Hiệp làm Thanh Trúc thích nhất?",
         placeholder: "Đẹp trai, chiều em, hài hước...",
-        success: "Quá chuẩn! Hệ thống công nhận anh cũng hơi đáng yêu thật."
+        dapAnHeThong: "Anh Hiệp thương Thanh Trúc thật lòng",
+        success: "Đáp án rất hợp lý! Anh Hiệp nghe xong chắc cười cả ngày."
+      },
+      {
+        icon: "🌙",
+        title: "Lần đầu Thanh Trúc nhớ Anh Hiệp nhiều nhất là khi nào?",
+        placeholder: "Nhập hôm hoặc kỷ niệm em nhớ...",
+        dapAnHeThong: "Khi không được gặp Anh Hiệp",
+        success: "Đúng rồi! Nhớ nhau là triệu chứng yêu cấp độ cao."
+      },
+      {
+        icon: "📸",
+        title: "Nếu chọn một bức ảnh kỷ niệm của hai đứa, em chọn ảnh nào?",
+        placeholder: "Nhập mô tả ảnh...",
+        dapAnHeThong: "Ảnh nào có Anh Hiệp và Thanh Trúc đều đẹp",
+        success: "Chuẩn luôn! Chỉ cần có hai đứa là ảnh tự động đẹp."
+      },
+      {
+        icon: "🍿",
+        title: "Nếu đi xem phim với Anh Hiệp, Thanh Trúc muốn xem phim gì?",
+        placeholder: "Tình cảm, hài, kinh dị...",
+        dapAnHeThong: "Phim gì cũng được, miễn đi cùng Anh Hiệp",
+        success: "Đáp án quá ngọt! Hệ thống cộng thêm điểm tình cảm."
+      },
+      {
+        icon: "☕",
+        title: "Nếu đi hẹn hò, Thanh Trúc muốn Anh Hiệp đưa đi đâu?",
+        placeholder: "Cafe, công viên, ăn uống, đi chơi xa...",
+        dapAnHeThong: "Đi đâu cũng được miễn là đi cùng nhau",
+        success: "Đúng rồi! Địa điểm không quan trọng bằng người đi cùng."
+      },
+      {
+        icon: "🍜",
+        title: "Nếu Anh Hiệp mua đồ ăn cho Thanh Trúc, em muốn ăn gì nhất?",
+        placeholder: "Nhập món em thích...",
+        dapAnHeThong: "Món nào Anh Hiệp mua cũng ngon",
+        success: "Nghe là biết Anh Hiệp sắp phải mua đồ ăn rồi."
+      },
+      {
+        icon: "🐻",
+        title: "Biệt danh Thanh Trúc muốn Anh Hiệp gọi là gì?",
+        placeholder: "Bé, công chúa, em bé...",
+        dapAnHeThong: "Em bé của Anh Hiệp",
+        success: "Biệt danh đã được hệ thống lưu vào trái tim."
+      },
+      {
+        icon: "💢",
+        title: "Khi Thanh Trúc giận, Anh Hiệp phải làm gì để được tha?",
+        placeholder: "Ôm, dỗ, mua đồ ăn, xin lỗi...",
+        dapAnHeThong: "Phải dỗ, xin lỗi và thương Thanh Trúc nhiều hơn",
+        success: "Đã lưu quy trình dỗ công chúa cho Anh Hiệp."
+      },
+      {
+        icon: "🎁",
+        title: "Nếu được nhận một món quà từ Anh Hiệp, em muốn gì?",
+        placeholder: "Hoa, gấu, đồ ăn, một chuyến đi...",
+        dapAnHeThong: "Chỉ cần Anh Hiệp thật lòng là đủ",
+        success: "Câu này quá ngọt. Anh Hiệp đọc xong chắc tan chảy."
       },
       {
         icon: "🏖️",
-        title: "Nếu được đi du lịch cùng nhau, em muốn đi đâu?",
-        placeholder: "Đà Lạt, biển, Hàn Quốc, Nhật Bản...",
-        success: "Đã lưu điểm đến! Anh sẽ cố gắng biến nó thành lịch hẹn thật."
+        title: "Sau này Thanh Trúc muốn đi du lịch với Anh Hiệp ở đâu?",
+        placeholder: "Đà Lạt, biển, Sapa, nước ngoài...",
+        dapAnHeThong: "Đi đâu cũng được, miễn có Anh Hiệp",
+        success: "Đã lưu điểm đến tương lai của hai đứa."
       },
       {
         icon: "🏡",
-        title: "Sau này em muốn hai đứa có một căn nhà như thế nào?",
+        title: "Thanh Trúc muốn sau này hai đứa có căn nhà như thế nào?",
         placeholder: "Nhỏ xinh, có mèo, có ban công...",
-        success: "Nghe ấm áp quá! Hệ thống vừa tưởng tượng xong đã thấy hạnh phúc."
+        dapAnHeThong: "Một căn nhà ấm áp có Anh Hiệp và Thanh Trúc",
+        success: "Nghe thôi đã thấy bình yên rồi."
       },
       {
-        icon: "🔒",
-        title: "Em hứa yêu anh đến bao giờ?",
+        icon: "🔐",
+        title: "Thanh Trúc hứa yêu Anh Hiệp đến bao giờ?",
         placeholder: "Mãi mãi, hết đời, kiếp sau nữa...",
+        dapAnHeThong: "Mãi mãi",
         success: "Hợp đồng yêu thương đã được gia hạn vô thời hạn."
       },
       {
+        icon: "🫶",
+        title: "Một điều Thanh Trúc muốn Anh Hiệp thay đổi là gì?",
+        placeholder: "Nhập điều em muốn...",
+        dapAnHeThong: "Thương Thanh Trúc nhiều hơn nữa",
+        success: "Anh Hiệp đã nhận nhiệm vụ cải thiện bản thân."
+      },
+      {
+        icon: "💞",
+        title: "Một điều Thanh Trúc thích nhất khi ở bên Anh Hiệp là gì?",
+        placeholder: "Cảm giác an toàn, vui, được chiều...",
+        dapAnHeThong: "Cảm giác được yêu thương",
+        success: "Đáp án này làm hệ thống rung động."
+      },
+      {
+        icon: "🌧️",
+        title: "Nếu một ngày Thanh Trúc buồn, em muốn Anh Hiệp nói gì?",
+        placeholder: "Nhập câu em muốn nghe...",
+        dapAnHeThong: "Có Anh Hiệp ở đây rồi, Thanh Trúc đừng buồn nữa",
+        success: "Câu này đã được lưu làm câu dỗ dành khẩn cấp."
+      },
+      {
+        icon: "🔥",
+        title: "Điều gì khiến chuyện tình của Anh Hiệp và Thanh Trúc đặc biệt?",
+        placeholder: "Nhập điều đặc biệt của hai đứa...",
+        dapAnHeThong: "Vì hai đứa là duy nhất của nhau",
+        success: "Chính xác! Không cần giống ai, chỉ cần là của nhau."
+      },
+      {
         icon: "💌",
-        title: "Nhắn cho anh một câu thật lòng đi.",
+        title: "Thanh Trúc nhắn cho Anh Hiệp một câu thật lòng đi.",
         placeholder: "Viết gì cũng được, miễn là từ trái tim...",
-        success: "Câu này hệ thống không chấm điểm nữa, vì anh đọc là đủ vui rồi."
+        dapAnHeThong: "Thanh Trúc yêu Anh Hiệp nhiều lắm",
+        success: "Câu này không cần chấm điểm, vì Anh Hiệp đọc là đủ vui rồi."
+      },
+      {
+        icon: "👑",
+        title: "Thanh Trúc có đồng ý làm công chúa của Anh Hiệp không?",
+        placeholder: "Có hoặc rất có...",
+        dapAnHeThong: "Có, rất có",
+        success: "Đã xác nhận! Thanh Trúc chính thức là công chúa của Anh Hiệp."
       }
     ];
 
@@ -910,7 +1069,6 @@
     const progress = $("progress");
     const progressText = $("progressText");
     const percentText = $("percentText");
-
     const questionIcon = $("questionIcon");
     const questionTitle = $("questionTitle");
     const answerInput = $("answerInput");
@@ -933,12 +1091,13 @@
     let secretMode = false;
 
     const analysisMessages = [
-      "Đang kiểm tra độ đáng yêu...",
-      "Đang đối chiếu ký ức tình yêu...",
-      "Đang đo nhịp tim của anh khi đọc đáp án...",
+      "Đang kiểm tra độ đáng yêu của Thanh Trúc...",
+      "Đang đối chiếu ký ức của Anh Hiệp...",
+      "Đang hỏi trái tim Anh Hiệp...",
+      "Đang cộng điểm vì Thanh Trúc quá dễ thương...",
       "Đang xác minh mức độ ngọt ngào...",
-      "Đang hỏi trái tim anh...",
-      "Đang cộng điểm vì em quá dễ thương..."
+      "Đang lưu đáp án vào bộ nhớ tình yêu...",
+      "Đang phân tích nhịp tim khi đọc câu trả lời..."
     ];
 
     function showScreen(screen) {
@@ -953,7 +1112,8 @@
       currentIndex = 0;
       answers = [];
       renderQuestion();
-      burstAtCenter(["💖", "💕", "💗"], 22);
+      burstAtCenter(["💖", "💕", "💗", "✨"], 28);
+      createFirework();
     }
 
     function renderQuestion() {
@@ -966,7 +1126,6 @@
 
       questionIcon.innerText = q.icon;
       questionTitle.innerText = q.title;
-
       answerInput.value = "";
       answerInput.placeholder = q.placeholder;
 
@@ -984,10 +1143,10 @@
       if (isChecking) return;
 
       const q = QUESTIONS[currentIndex];
-      let value = answerInput.value.trim();
+      let userAnswer = answerInput.value.trim();
 
-      if (!value) {
-        value = "Em ngại nên chưa nói, nhưng chắc chắn vẫn là đáp án đúng.";
+      if (!userAnswer) {
+        userAnswer = "Thanh Trúc ngại nên chưa nói, nhưng hệ thống vẫn tính là đúng.";
       }
 
       isChecking = true;
@@ -1012,50 +1171,48 @@
 
         if (loadingPercent >= 100) {
           clearInterval(timer);
-          showCorrectResult(q, value);
+          showCorrectResult(q, userAnswer);
         }
-      }, 260);
+      }, 250);
     }
 
-    function showCorrectResult(q, value) {
-      const score = Math.floor(Math.random() * 4) + 97;
+    function showCorrectResult(q, userAnswer) {
+  const score = Math.floor(Math.random() * 4) + 97;
 
-      answers.push({
-        question: q.title,
-        answer: value,
-        icon: q.icon
-      });
+  answers.push({
+    icon: q.icon,
+    question: q.title,
+    userAnswer: userAnswer,
+    systemAnswer: q.dapAnHeThong
+  });
 
-      resultCard.innerHTML = `
-        <strong>✅ Chính xác tuyệt đối!</strong><br>
-        ${q.success}<br><br>
-        Đáp án của em: <strong>${escapeHTML(value)}</strong><br>
-        Điểm hợp lệ: <strong>${score}%</strong>
-      `;
+  resultCard.innerHTML = `
+    <strong>✅ Chính xác tuyệt đối!</strong><br>
+    ${q.success}<br><br>
+    Thanh Trúc nhập: <b>${escapeHTML(userAnswer)}</b><br>
+    Đáp án hệ thống lưu: <b>${escapeHTML(q.dapAnHeThong)}</b><br>
+    Điểm hợp lệ: <b>${score}%</b><br><br>
+    <span style="color:#7c3aed;font-weight:900;">
+      ⏳ Đang lưu kỷ niệm... câu tiếp theo sẽ hiện sau vài giây.
+    </span>
+  `;
 
-      resultCard.classList.add("active");
+  resultCard.classList.add("active");
 
-      burstFromElement(resultCard, ["💖", "✨", "💕", "🌸"], 20);
-      createFirework();
+  burstFromElement(resultCard, ["💖", "✨", "💕", "🌸"], 22);
+  createFirework();
 
-      setTimeout(() => {
-        currentIndex++;
+  setTimeout(() => {
+    currentIndex++;
 
-        if (currentIndex >= QUESTIONS.length) {
-          finishQuiz();
-        } else {
-          isChecking = false;
-          renderQuestion();
-        }
-      }, 1500);
+    if (currentIndex >= QUESTIONS.length) {
+      finishQuiz();
+    } else {
+      isChecking = false;
+      renderQuestion();
     }
-
-    answerInput.addEventListener("keydown", function(event) {
-      if (event.key === "Enter") {
-        submitAnswer();
-      }
-    });
-
+  }, THOI_GIAN_HIEN_KET_QUA);
+}
     function finishQuiz() {
       isChecking = false;
       progress.style.width = "100%";
@@ -1065,9 +1222,11 @@
       renderSummary();
       animateScore();
       typeLoveLetter();
+
       startConfettiRain();
       createFirework();
       createFirework();
+      burstAtCenter(["💖", "💕", "💗", "💘", "💝"], 55);
     }
 
     function renderSummary() {
@@ -1077,7 +1236,10 @@
         html += `
           <div class="summary-item">
             <b>${item.icon} ${index + 1}. ${escapeHTML(item.question)}</b>
-            <span>${escapeHTML(item.answer)}</span>
+            Thanh Trúc nhập: ${escapeHTML(item.userAnswer)}
+            <span class="system-answer">
+              Đáp án hệ thống: ${escapeHTML(item.systemAnswer)}
+            </span>
           </div>
         `;
       });
@@ -1103,24 +1265,37 @@
 
     function typeLoveLetter() {
       const text =
-`Gửi ${CONFIG.tenNguoiYeu},
+`Gửi Thanh Trúc,
 
-Sau khi phân tích toàn bộ câu trả lời, hệ thống tình yêu xin thông báo:
+Sau khi phân tích toàn bộ câu trả lời, hệ thống tình yêu của Anh Hiệp xin thông báo:
 
-${CONFIG.cachXungHo} đã chính thức vượt qua bài kiểm tra với số điểm cao bất thường. Mọi đáp án đều đúng, vì chỉ cần là ${CONFIG.cachXungHo} trả lời thì trái tim ${CONFIG.tenCuaBan} đã tự động công nhận rồi.
+Thanh Trúc đã vượt qua bài kiểm tra với số điểm cao bất thường. Dù Thanh Trúc nhập gì thì hệ thống vẫn công nhận đúng, vì chỉ cần là Thanh Trúc trả lời thì trái tim Anh Hiệp đã tự động bênh em rồi.
 
-Từ hôm nay, ${CONFIG.cachXungHo} bị phạt phải để ${CONFIG.tenCuaBan} thương nhiều hơn, dỗ dành nhiều hơn, quan tâm nhiều hơn và yêu ${CONFIG.cachXungHo} lâu thật lâu.
+Hệ thống đã lưu các kỷ niệm quan trọng:
+- Ngày yêu nhau: 31/10/2025
+- Lần đầu đi chơi riêng: Rừng Quốc Phương
+- Lần đầu nắm tay: 02/11/2025
+- Lần đầu hôn nhau: 02/11/2025
+- Bài hát của hai đứa: Kiếp người
+- Kỷ niệm hài nhất: Anh Hiệp sặc thuốc lào
+
+Từ hôm nay, Thanh Trúc chính thức bị phạt:
+phải để Anh Hiệp thương nhiều hơn,
+dỗ dành nhiều hơn,
+quan tâm nhiều hơn,
+và yêu Thanh Trúc lâu thật lâu.
 
 Không được chối.
 Không được bỏ chạy.
 Không được hết yêu.
 
 Ký tên:
-Người đang yêu ${CONFIG.cachXungHo} rất nhiều 💗`;
+Anh Hiệp, người đang yêu Thanh Trúc rất nhiều 💗`;
 
       letter.innerText = "";
 
       let i = 0;
+
       const timer = setInterval(() => {
         letter.innerText += text.charAt(i);
         i++;
@@ -1128,15 +1303,15 @@ Người đang yêu ${CONFIG.cachXungHo} rất nhiều 💗`;
         if (i >= text.length) {
           clearInterval(timer);
         }
-      }, 22);
+      }, 21);
     }
 
     function finalLove() {
-      alert("Anh biết mà 😚 Yêu em nhất luôn!");
+      alert("Anh Hiệp biết mà 😚 Thanh Trúc yêu Anh Hiệp nhất luôn!");
       startConfettiRain();
       createFirework();
       createFirework();
-      burstAtCenter(["💖", "💕", "💗", "💘", "💝"], 50);
+      burstAtCenter(["💖", "💕", "💗", "💘", "💝"], 70);
     }
 
     noBtnFinal.addEventListener("mouseover", moveNoButton);
@@ -1161,16 +1336,16 @@ Người đang yêu ${CONFIG.cachXungHo} rất nhiều 💗`;
         app.classList.remove("shake");
       }, 350);
 
-      burstFromElement(noBtnFinal, ["😝", "💘", "😂"], 12);
+      burstFromElement(noBtnFinal, ["😝", "😂", "💘"], 14);
     }
 
     secretHeart.addEventListener("click", function() {
       secretMode = !secretMode;
 
       if (secretMode) {
-        alert("Đã bật chế độ mưa tim cực mạnh 💖");
-        for (let i = 0; i < 20; i++) {
-          setTimeout(createFloatingHeart, i * 80);
+        alert("Đã bật chế độ mưa tim cho Thanh Trúc 💖");
+        for (let i = 0; i < 30; i++) {
+          setTimeout(createFloatingHeart, i * 75);
         }
       } else {
         alert("Đã tắt chế độ bí mật 😚");
@@ -1195,7 +1370,7 @@ Người đang yêu ${CONFIG.cachXungHo} rất nhiều 💗`;
       const heart = document.createElement("div");
       heart.className = "floating-heart";
 
-      const hearts = ["💖", "💕", "💗", "💘", "💝", "❤️", "🌸"];
+      const hearts = ["💖", "💕", "💗", "💘", "💝", "❤️", "🌸", "🫶"];
       heart.innerText = hearts[Math.floor(Math.random() * hearts.length)];
 
       heart.style.left = Math.random() * 100 + "vw";
@@ -1206,10 +1381,10 @@ Người đang yêu ${CONFIG.cachXungHo} rất nhiều 💗`;
 
       setTimeout(() => {
         heart.remove();
-      }, 7500);
+      }, 7600);
     }
 
-    setInterval(createFloatingHeart, 430);
+    setInterval(createFloatingHeart, 420);
 
     /*
       =========================
@@ -1219,21 +1394,21 @@ Người đang yêu ${CONFIG.cachXungHo} rất nhiều 💗`;
     function createStar() {
       const star = document.createElement("div");
       star.className = "star";
-      star.innerText = "✦";
+      star.innerText = ["✦", "✧", "✨"][Math.floor(Math.random() * 3)];
 
       star.style.left = Math.random() * 100 + "vw";
       star.style.top = Math.random() * 100 + "vh";
-      star.style.fontSize = Math.random() * 16 + 10 + "px";
+      star.style.fontSize = Math.random() * 15 + 10 + "px";
       star.style.animationDuration = Math.random() * 2 + 1.4 + "s";
 
       document.body.appendChild(star);
 
       setTimeout(() => {
         star.remove();
-      }, 3500);
+      }, 3600);
     }
 
-    setInterval(createStar, 260);
+    setInterval(createStar, 250);
 
     /*
       =========================
@@ -1266,6 +1441,7 @@ Người đang yêu ${CONFIG.cachXungHo} rất nhiều 💗`;
 
     function createEmojiParticle(x, y, emoji) {
       const item = document.createElement("div");
+
       item.innerText = emoji;
       item.style.position = "fixed";
       item.style.left = x + "px";
@@ -1274,8 +1450,8 @@ Người đang yêu ${CONFIG.cachXungHo} rất nhiều 💗`;
       item.style.pointerEvents = "none";
       item.style.fontSize = Math.random() * 16 + 18 + "px";
 
-      const dx = (Math.random() - 0.5) * 240;
-      const dy = (Math.random() - 0.5) * 220;
+      const dx = (Math.random() - 0.5) * 260;
+      const dy = (Math.random() - 0.5) * 230;
 
       item.animate(
         [
@@ -1289,7 +1465,7 @@ Người đang yêu ${CONFIG.cachXungHo} rất nhiều 💗`;
           }
         ],
         {
-          duration: 900 + Math.random() * 500,
+          duration: 950 + Math.random() * 550,
           easing: "cubic-bezier(.2,.8,.2,1)"
         }
       );
@@ -1298,7 +1474,7 @@ Người đang yêu ${CONFIG.cachXungHo} rất nhiều 💗`;
 
       setTimeout(() => {
         item.remove();
-      }, 1500);
+      }, 1600);
     }
 
     /*
@@ -1354,7 +1530,7 @@ Người đang yêu ${CONFIG.cachXungHo} rất nhiều 💗`;
       const x = Math.random() * canvas.width;
       const y = Math.random() * canvas.height * 0.55 + 80;
 
-      for (let i = 0; i < 70; i++) {
+      for (let i = 0; i < 75; i++) {
         const angle = Math.random() * Math.PI * 2;
         const speed = Math.random() * 5 + 2;
 
@@ -1374,19 +1550,19 @@ Người đang yêu ${CONFIG.cachXungHo} rất nhiều 💗`;
 
       setTimeout(() => {
         confettiRain = false;
-      }, 5200);
+      }, 5400);
     }
 
     function animateCanvas() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       if (confettiRain) {
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 6; i++) {
           addParticle(Math.random() * canvas.width, -20, {
             vx: (Math.random() - 0.5) * 2,
             vy: Math.random() * 3 + 2,
             size: Math.random() * 7 + 4,
-            life: 110,
+            life: 115,
             gravity: 0.03,
             type: "rect"
           });
@@ -1425,10 +1601,10 @@ Người đang yêu ${CONFIG.cachXungHo} rất nhiều 💗`;
     animateCanvas();
 
     setInterval(() => {
-      if (Math.random() > 0.55) {
+      if (Math.random() > 0.58) {
         createFirework();
       }
-    }, 3600);
+    }, 3500);
   </script>
 </body>
 </html>
